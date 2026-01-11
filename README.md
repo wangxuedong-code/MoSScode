@@ -7,3 +7,5 @@ Configure the running environment by installing dependencies according to the re
 ```bash
 # Install required packages
 pip install -r requirements.txt
+# Run the model training script
+python model_trainer.py
