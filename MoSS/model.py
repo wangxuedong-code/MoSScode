@@ -13,7 +13,7 @@ import math
 import xgboost as xgb
 from statistics import mode
 from sklearn.kernel_approximation import AdditiveChi2Sampler
-pd.set_option('display.max_columns', None)  # 结果显示完整的列
+pd.set_option('display.max_columns', None)  
 
 
 class TreeNode:
@@ -41,7 +41,6 @@ def most_frequent_label(resul):
 
 
 def compute_weight_by_accuracy(classifier, df, feature, anova):
-    # 根据分类器的准确率分配权重
     if 'label' in feature:
         feature = feature
     else:
@@ -318,12 +317,7 @@ def mutual_information_between(x, y):
 
 
 def check_dataset(dataset):
-    if not isinstance(dataset, pd.DataFrame):
-        raise ValueError("输入不是一个有效的 DataFrame")
-    if 'label' not in dataset.columns:
-        raise ValueError("数据集中缺少 'label' 列")
-
-    num_columns_without_label = len(dataset.columns) - 1  # 减去 'label' 列
+    num_columns_without_label = len(dataset.columns) - 1  
 
     if num_columns_without_label <= 2 and dataset.drop(columns='label').isnull().any(axis=1).all():
         return 1
@@ -360,7 +354,7 @@ def fusion(a, b):
     for s in range(len(m1)):
         A = (m1[s] * m2[s]) / denominator
         list_A.append(A)
-    list_A = np.nan_to_num(list_A, nan=0.0, posinf=1.0, neginf=0.0)  # 清理无效值
+    list_A = np.nan_to_num(list_A, nan=0.0, posinf=1.0, neginf=0.0) 
     sum_A = np.sum(list_A)
     if sum_A < 1e-8:
         list2 = np.ones_like(list_A) / len(list_A)
@@ -677,6 +671,7 @@ def models(df, para_c, para_k, para_a, para_n, para_s, para_b, breaklB, breaklS)
     }
 
     return all_results, metrics_mean, metrics_std, Y_sample, Accuracy
+
 
 
 
